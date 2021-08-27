@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace Data.Context
 {
-    class MyContext : DbContext
+    public class MyContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
 

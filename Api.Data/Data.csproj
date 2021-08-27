@@ -16,9 +16,6 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Repository\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <ProjectReference Include="..\Api.Domain\Domain.csproj" />
 	</ItemGroup>
 </Project>
