@@ -16,7 +16,6 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Mapping\" />
 	  <Folder Include="Repository\" />
 	</ItemGroup>
 	<ItemGroup>
