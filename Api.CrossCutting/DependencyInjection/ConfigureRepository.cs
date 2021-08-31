@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Data.Repository;
 using Domain.Interfaces;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Domain.Repository;
+using Data.Implementations;
 
 namespace CrossCutting.DependencyInjection
 {
@@ -13,12 +12,13 @@ namespace CrossCutting.DependencyInjection
     {
         public static void ConfigureDependenceRepository(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            serviceCollection.AddScoped<IUserRepository, UserImplementation>();
+
             serviceCollection.AddDbContext<MyContext>
             (
                 options => options.UseMySql("Server=localhost;Port=3306;Database=WebAPI;Uid=Dev;Pwd=1234AbCd")
             );
-
-            serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
         }
     }
 }

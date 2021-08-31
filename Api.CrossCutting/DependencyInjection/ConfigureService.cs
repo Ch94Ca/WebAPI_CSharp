@@ -12,7 +12,7 @@ namespace CrossCutting.DependencyInjection
         public static void ConfigureDependenceService(IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<IUserService, UserService>();
-
+            serviceCollection.AddTransient<ILoginService, LoginService>();
         }
     }
 }
