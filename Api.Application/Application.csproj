@@ -1,14 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <ItemGroup>
-    <ProjectReference Include="..\Api.Domain\Domain.csproj" />
-    <ProjectReference Include="..\Api.Service\Service.csproj" />
-    <ProjectReference Include="..\Api.CrossCutting\CrossCutting.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Api.Domain\Domain.csproj" />
+		<ProjectReference Include="..\Api.Service\Service.csproj" />
+		<ProjectReference Include="..\Api.CrossCutting\CrossCutting.csproj" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
+	</ItemGroup>
 
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
 
 </Project>
