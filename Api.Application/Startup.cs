@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using CrossCutting.DependencyInjection;
+using Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application
 {
@@ -24,6 +27,8 @@ namespace Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureService.ConfigureDependenceService(services);
+            ConfigureRepository.ConfigureDependenceRepository(services);
             services.AddControllers();
         }
 
