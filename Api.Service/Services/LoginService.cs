@@ -3,31 +3,28 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using Domain.Interfaces;
 using Domain.Dtos;
 using Domain.Entities;
+using Domain.Interfaces;
 using Domain.Repository;
 using Domain.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Service.Services
+namespace Api.Service.Services
 {
     public class LoginService : ILoginService
     {
-        private readonly IUserRepository _repository;
+        private IUserRepository _repository;
         public SigningConfigurations _signingConfigurations;
-        public TokenConfigurations _tokenConfigurations;
         private IConfiguration _configuration { get; }
 
         public LoginService(IUserRepository repository,
-            SigningConfigurations signingConfigurations,
-            TokenConfigurations tokenConfigurations,
-            IConfiguration configuration)
+                            SigningConfigurations signingConfigurations,
+                            IConfiguration configuration)
         {
             _repository = repository;
             _signingConfigurations = signingConfigurations;
-            _tokenConfigurations = tokenConfigurations;
             _configuration = configuration;
         }
 
@@ -57,7 +54,7 @@ namespace Service.Services
                     );
 
                     DateTime createDate = DateTime.UtcNow;
-                    DateTime expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
+                    DateTime expirationDate = createDate + TimeSpan.FromSeconds(Convert.ToInt32(Environment.GetEnvironmentVariable("Seconds")));
 
                     var handler = new JwtSecurityTokenHandler();
                     string token = CreateToken(identity, createDate, expirationDate, handler);
@@ -78,8 +75,8 @@ namespace Service.Services
         {
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
-                Issuer = _tokenConfigurations.Issuer,
-                Audience = _tokenConfigurations.Audience,
+                Issuer = Environment.GetEnvironmentVariable("Issuer"),
+                Audience = Environment.GetEnvironmentVariable("Audience"),
                 SigningCredentials = _signingConfigurations.SigningCredentials,
                 Subject = identity,
                 NotBefore = createDate,
@@ -103,5 +100,6 @@ namespace Service.Services
                 message = "Usuário Logado com sucesso"
             };
         }
+
     }
 }
